@@ -28,6 +28,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+app.use(express.static("dist"));
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello Wolrld!</h1>");
