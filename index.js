@@ -21,11 +21,13 @@ let notes = [
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["PUT", "GET", "POST"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}))
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["PUT", "GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello Wolrld!</h1>");
@@ -75,7 +77,7 @@ app.post("/api/notes", (requset, response) => {
   response.json(note);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
