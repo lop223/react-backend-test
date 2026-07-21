@@ -1,23 +1,10 @@
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
 
-let notes = [
-  {
-    id: "1",
-    content: "HTML is easy",
-    important: true,
-  },
-  {
-    id: "2",
-    content: "Browser can execute only JavaScript",
-    important: false,
-  },
-  {
-    id: "3",
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true,
-  },
-];
+import "dotenv/config";
+
+import Note from "./models/note.js";
 
 const app = express();
 app.use(express.json());
@@ -30,12 +17,8 @@ app.use(
 );
 app.use(express.static("dist"));
 
-app.get("/", (request, response) => {
-  response.send("<h1>Hello Wolrld!</h1>");
-});
-
 app.get("/api/notes", (request, response) => {
-  response.json(notes);
+  Note.find({}).then((notes) => response.json(notes));
 });
 
 app.get("/api/notes/:id", (request, response) => {
@@ -78,7 +61,7 @@ app.post("/api/notes", (requset, response) => {
   response.json(note);
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
