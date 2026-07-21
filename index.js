@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import mongoose from "mongoose";
 
 import "dotenv/config";
@@ -8,13 +7,6 @@ import Note from "./models/note.js";
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["PUT", "GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
 app.use(express.static("dist"));
 
 app.get("/api/notes", (request, response) => {
