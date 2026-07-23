@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/notes/6a5fbc98ac73cb0ff8af1fe9
+Content-Type: application/json
+
+{
+    "content": "JavaScript is defecalt programing languag",
+    "important": true
+}

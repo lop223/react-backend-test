@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
 const url = process.env.MONGODB_URI;
-
-console.log('URI:', process.env.MONGODB_URI)
 console.log("connecting to url", url);
 mongoose
   .connect(url)
@@ -10,7 +8,11 @@ mongoose
   .catch((error) => console.log("❌ error conecting to MongoDB"));
 
 const noteSchema = new mongoose.Schema({
-  content: String,
+  content: {
+    type: String,
+    minLength: 5,
+    required: true
+  },
   important: Boolean,
 });
 
